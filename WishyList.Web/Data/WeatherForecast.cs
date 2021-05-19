@@ -1,6 +1,6 @@
 using System;
 
-namespace BlazorApp.Data
+namespace WishyList.Web.Data
 {
     public class WeatherForecast
     {
