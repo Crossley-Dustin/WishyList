@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WishyList.Models
 {
-    class List
+    public class List
     {
         public int ListId { get; set; }
         public int GroupId { get; set; }

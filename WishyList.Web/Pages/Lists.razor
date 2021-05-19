@@ -1,8 +1,19 @@
-﻿@page "/lists"
+﻿@page "/"
+@inherits ListsBase
 
-<h1>Welcome to your Lists!</h1>
+<h1>Welcome to your List!</h1>
 
-<ul>
-    <li>Birthday List</li>
-    <li>Christmas List</li>
-</ul>
+@if (Items == null)
+            {
+                <div class="spinner"></div>
+            }
+else
+            {
+                <ul>
+                    @foreach (var item in Items)
+                {
+                    <li>@item.Label</li>
+                }
+                </ul>
+            }
+
