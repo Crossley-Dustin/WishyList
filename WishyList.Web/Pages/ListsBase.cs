@@ -18,7 +18,7 @@ namespace WishyList.Web.Pages
 
         private void LoadItems()
         {
-            System.Threading.Thread.Sleep(2000);
+            System.Threading.Thread.Sleep(1000);
 
             Item I1 = new Item
             {

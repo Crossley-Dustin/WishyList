@@ -1,0 +1,18 @@
+﻿@page "/members"
+@inherits MembersBase
+
+<h3>Members</h3>
+
+@if (Members == null)
+{
+    <div class="spinner"></div>
+}
+else
+{
+    <ul>
+        @foreach (var member in Members)
+        {
+            <li>@member.Name</li>
+        }
+    </ul>
+}
