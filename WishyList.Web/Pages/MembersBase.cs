@@ -20,7 +20,7 @@ namespace WishyList.Web.Pages
         private void LoadMembers()
         {
             System.Threading.Thread.Sleep(1000);
-
+            /*
             Member M1 = new Member
             {
                 MemberId = 1,
@@ -62,6 +62,7 @@ namespace WishyList.Web.Pages
             };
 
             Members = new List<Member> { M1, M2, M3, M4 };
+            */
         }
     }
 }
