@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WishyList.Web", "WishyList.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WishyList.Models", "WishyList.Models\WishyList.Models.csproj", "{7E15FD86-B04A-4980-9CDE-0E1163E47810}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WishyList.Api", "WishyList.Api\WishyList.Api.csproj", "{E3577E52-DF8E-4226-A45C-F39ECD40AB54}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WishyList.Api", "WishyList.Api\WishyList.Api.csproj", "{E3577E52-DF8E-4226-A45C-F39ECD40AB54}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

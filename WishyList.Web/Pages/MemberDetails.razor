@@ -1,0 +1,16 @@
+﻿@page "/memberdetails/{id}"
+@inherits MemberDetailsBase
+
+<h3>MemberDetails</h3>
+
+<div>
+    <h4>@Member.Name</h4>
+    <h4>@Member.Email</h4>
+</div>
+
+<div>
+    <a href="/members" class="btn btn-primary">Back</a>
+    <a href="@($"editmember/{Member.MemberId}")" class="btn btn-primary">Edit</a>
+    <a href="@($"memberdetails/{Member.MemberId}")" class="btn btn-danger">Delete</a>
+</div>
+

@@ -12,7 +12,7 @@ else
     <ul>
         @foreach (var member in Members)
         {
-            <li>@member.Name</li>
+            <li><a href="@($"memberdetails/{member.MemberId}")" class="btn btn-primary m-1">@member.Name</a></li>
         }
     </ul>
 }

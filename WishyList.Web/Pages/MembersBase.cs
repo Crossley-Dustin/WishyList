@@ -5,22 +5,26 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using WishyList.Models;
+using WishyList.Web.Services;
 
 namespace WishyList.Web.Pages
 {
     public class MembersBase : ComponentBase
     {
         public IEnumerable<Member> Members { get; set; }
+        
+        [Inject]
+        public IMemberService MemberService { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
-            await Task.Run(LoadMembers);
+            Members = (await MemberService.GetMembers()).ToList();
         }
 
+            /*
         private void LoadMembers()
         {
             System.Threading.Thread.Sleep(1000);
-            /*
             Member M1 = new Member
             {
                 MemberId = 1,
@@ -62,7 +66,7 @@ namespace WishyList.Web.Pages
             };
 
             Members = new List<Member> { M1, M2, M3, M4 };
-            */
         }
+            */
     }
 }
