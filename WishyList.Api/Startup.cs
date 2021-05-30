@@ -33,6 +33,7 @@ namespace WishyList.Api
 
             // Tie Repository interface and Implementation classes together
             services.AddScoped<IMemberRepository, MemberRepository>();
+            services.AddScoped<IListRepository, ListRepository>();
 
             services.AddControllers();
         }
