@@ -47,6 +47,15 @@ namespace WishyList.Api.Models
             return await appDbContext.Lists.ToListAsync();
         }
 
+        public async Task<IEnumerable<List>> GetMemberLists(int memberId)
+        {
+            // Use a query to get a filtered result of lists for the specified member
+            IQueryable<List> query = appDbContext.Lists;
+            query = query.Where(m => m.MemberId == memberId);
+
+            return await query.ToListAsync();
+        }
+
         public async Task<List> UpdateList(List list)
         {
             var result = await appDbContext.Lists.FirstOrDefaultAsync(m => m.ListId == list.ListId);
@@ -65,5 +74,6 @@ namespace WishyList.Api.Models
 
             return null;
         }
+
     }
 }

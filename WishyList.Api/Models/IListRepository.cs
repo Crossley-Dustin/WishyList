@@ -10,6 +10,7 @@ namespace WishyList.Api.Models
     {
         Task<IEnumerable<List>> GetLists();
         Task<List> GetList(int listId);
+        Task<IEnumerable<List>> GetMemberLists(int memberId);
         Task<List> AddList(List list);
         Task<List> UpdateList(List list);
         Task<List> DeleteList(int listId);

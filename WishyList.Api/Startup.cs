@@ -32,6 +32,7 @@ namespace WishyList.Api
             services.AddServerSideBlazor();
 
             // Tie Repository interface and Implementation classes together
+            // When a call for IMemberRepository comes through, this line tells it which implementation to use, in this case MemberRepository class
             services.AddScoped<IMemberRepository, MemberRepository>();
             services.AddScoped<IListRepository, ListRepository>();
 
