@@ -11,16 +11,16 @@ namespace WishyList.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MemberLists : ControllerBase
+    public class MemberListsController : ControllerBase
     {
         private readonly IListRepository listRepository;
 
-        public MemberLists(IListRepository listRepository)
+        public MemberListsController(IListRepository listRepository)
         {
             this.listRepository = listRepository;
         }
 
-        [HttpGet("{id:int }")]
+        [HttpGet("{id:int}")]
         public async Task<ActionResult<List>> GetMemberLists(int memberId)
         {
             try
