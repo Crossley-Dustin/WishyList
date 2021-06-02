@@ -21,11 +21,11 @@ namespace WishyList.Api.Controllers
         }
 
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<List>> GetMemberLists(int memberId)
+        public async Task<ActionResult<List>> GetMemberLists(int Id)
         {
             try
             {
-                return Ok( await listRepository.GetMemberLists(memberId));
+                return Ok( await listRepository.GetMemberLists(Id));
 
             }
             catch (Exception)

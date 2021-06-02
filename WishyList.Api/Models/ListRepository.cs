@@ -42,6 +42,11 @@ namespace WishyList.Api.Models
             return await appDbContext.Lists.FirstOrDefaultAsync(m => m.ListId == listId);
         }
 
+        public async Task<List> GetListByName(string listName)
+        {
+            return await appDbContext.Lists.FirstOrDefaultAsync(m => m.Name == listName);
+        }
+
         public async Task<IEnumerable<List>> GetLists()
         {
             return await appDbContext.Lists.ToListAsync();
