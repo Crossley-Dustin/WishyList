@@ -3,16 +3,16 @@
 
 <h1>Welcome to your List!</h1>
 
-@if (Items == null)
+@if (Lists == null)
             {
                 <div class="spinner"></div>
             }
 else
             {
                 <ul>
-                    @foreach (var item in Items)
+                    @foreach (var list in Lists)
                 {
-                    <li>@item.Label</li>
+                    <li>@list.Name</li>
                 }
                 </ul>
             }

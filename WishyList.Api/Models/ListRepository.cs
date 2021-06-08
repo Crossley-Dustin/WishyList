@@ -68,9 +68,9 @@ namespace WishyList.Api.Models
             if (result != null)
             {
                 result.Name = list.Name;
-                result.GroupId = list.GroupId;
-                result.MemberId = list.MemberId;
-                result.InsertDate = list.InsertDate;
+                // result.GroupId = list.GroupId;
+                // result.MemberId = list.MemberId;
+                // result.InsertDate = list.InsertDate;
 
                 await appDbContext.SaveChangesAsync();
 

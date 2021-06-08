@@ -39,7 +39,7 @@ namespace WishyList.Api.Models
 
         public async Task<Member> GetMember(int memberId)
         {
-            return await appDbContext.Members.FirstOrDefaultAsync(m => m.MemberId == memberId);
+            return await appDbContext.Members.FindAsync(memberId);
         }
 
         public async Task<Member> GetMemberByEmail(string email)

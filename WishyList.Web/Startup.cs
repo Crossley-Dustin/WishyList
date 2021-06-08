@@ -34,6 +34,11 @@ namespace WishyList.Web
                 // Make sure this is the base address of the API and NOT the web project!!!
                 client.BaseAddress = new Uri("https://localhost:44303/");
             });
+
+            services.AddHttpClient<IListService, ListService>(client =>
+            {
+                client.BaseAddress = new Uri("https://localhost:44303/");
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

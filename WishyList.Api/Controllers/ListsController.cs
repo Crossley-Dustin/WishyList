@@ -36,7 +36,28 @@ namespace WishyList.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database");
             }
         }
-        */
+        //*/
+        
+        ///*
+        
+        [Route("[action]/{id:int}")]
+        //[HttpGet("{id:int}")]
+        [HttpGet]
+        public async Task<ActionResult<List>> GetMemberLists(int Id)
+        {
+            // api/lists/GetMemberLists/1
+            try
+            {
+                return Ok(await listRepository.GetMemberLists(Id));
+
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database");
+            }
+        }
+        //*/
 
         [HttpGet("{id:int}")]
         public async Task<ActionResult<List>> GetList(int id)
