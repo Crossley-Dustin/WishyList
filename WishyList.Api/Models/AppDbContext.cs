@@ -17,7 +17,6 @@ namespace WishyList.Api.Models
         //public DbSet<GroupMember> GroupMembers { get; set; }
         public DbSet<Member> Members { get; set; }
         public DbSet<List> Lists { get; set; }
-
         public DbSet<Item> Items { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

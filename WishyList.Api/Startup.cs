@@ -35,6 +35,7 @@ namespace WishyList.Api
             // When a call for IMemberRepository comes through, this line tells it which implementation to use, in this case MemberRepository class
             services.AddScoped<IMemberRepository, MemberRepository>();
             services.AddScoped<IListRepository, ListRepository>();
+            services.AddScoped<IItemRepository, ItemRepository>();
 
             services.AddControllers();
         }

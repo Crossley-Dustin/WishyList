@@ -11,60 +11,40 @@ namespace WishyList.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ListsController : ControllerBase
+    public class ItemsController : ControllerBase
     {
         private readonly IListRepository listRepository;
-
+        private readonly IItemRepository itemRepository;
         private readonly IMemberRepository memberRepository;
 
-        public ListsController(IListRepository listRepository, IMemberRepository memberRepository)
+        public ItemsController(IMemberRepository memberRepository, IListRepository listRepository, IItemRepository itemRepository)
         {
             this.listRepository = listRepository;
+            this.itemRepository = itemRepository;
             this.memberRepository = memberRepository;
         }
 
-        /*
-        [HttpGet]
-        public async Task<ActionResult> GetLists()
-        {
-            try
-            {
-                return Ok(await listRepository.GetLists());
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database");
-            }
-        }
-        //*/
-        
-        ///*
-        
         [Route("[action]/{id:int}")]
-        //[HttpGet("{id:int}")]
         [HttpGet]
-        public async Task<ActionResult<List>> GetMemberLists(int Id)
+        public async Task<ActionResult<Item>> GetListItems(int id)
         {
-            // api/lists/GetMemberLists/1
+            // api/items/GetListItems/1
             try
             {
-                return Ok(await listRepository.GetMemberLists(Id));
-
+                return Ok(await itemRepository.GetListItems(id));
             }
             catch (Exception)
             {
-
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database");
             }
         }
-        //*/
 
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<List>> GetList(int id)
+        public async Task<ActionResult<Item>> GetItem(int id)
         {
             try
             {
-                var result = await listRepository.GetList(id);
+                var result = await itemRepository.GetItem(id);
 
                 if (result == null)
                 {
@@ -80,63 +60,69 @@ namespace WishyList.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<List>> CreateList(List list)
+        public async Task<ActionResult<Item>> CreateItem(Item item)
         {
             try
             {
-                // Check list
-                if (list == null)
+                // Check item
+                if (item == null)
                 {
-                    return BadRequest("Empty list");
+                    return BadRequest("Empty Item");
                 }
 
-                // check member
-                var member = await memberRepository.GetMember(list.MemberId);
+                // Check list
+                var list = await listRepository.GetList(item.ListId);
+
+                if (list == null)
+                {
+                    return BadRequest("Invalid list");
+                }
+
+                // Check member
+                var member = await memberRepository.GetMember(item.MemberId);
 
                 if (member == null)
                 {
                     return BadRequest("Invalid member");
                 }
+                
+                // Check item name, makes sure it is unique within the current list
+                var itm = await itemRepository.GetItemByName(item.ListId, item.Label);
 
-                // check list name
-                var lst = await listRepository.GetListByName(list.Name);
-
-                if (lst != null)
+                if (itm != null)
                 {
-                    ModelState.AddModelError("List Name", "List name already in use.");
-                    return BadRequest(ModelState);
+                    ModelState.AddModelError("Item Name", "Item name already in use for this list");
                 }
 
-                // create list
-                var createdList = await listRepository.AddList(list);
+                // create item
+                var createdItem = await itemRepository.AddItem(item);
 
-                return CreatedAtAction(nameof(GetList), new { id = createdList.ListId }, createdList);
+                return CreatedAtAction(nameof(GetItem), new { id = createdItem.ListId }, createdItem);
             }
             catch (Exception)
             {
-
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database");
             }
         }
 
         [HttpPut("{id:int}")]
-        public async Task<ActionResult<List>> UpdateList(int id, List list)
+        public async Task<ActionResult<Item>> UpdateItem(int id, Item item)
         {
             try
             {
-                if (id != list.ListId)
+                if (id != item.ItemId)
                 {
-                    return BadRequest("List ID mismatch");
+                    return BadRequest("Item ID mismatch");
                 }
 
-                var listToUpdate = await listRepository.GetList(id);
+                var itemToUpdate = await itemRepository.GetItem(id);
 
-                if (listToUpdate == null)
+                if (itemToUpdate == null)
                 {
-                    return NotFound($"List with Id = {id} not found");
+                    return NotFound($"Item with Id = {id} not found");
                 }
 
-                return await listRepository.UpdateList(list);
+                return await itemRepository.UpdateItem(item);
             }
             catch (Exception)
             {
@@ -145,18 +131,18 @@ namespace WishyList.Api.Controllers
         }
 
         [HttpDelete("{id:int}")]
-        public async Task<ActionResult<List>> DeleteList(int id)
+        public async Task<ActionResult<Item>> DeleteItem(int id)
         {
             try
             {
-                var listToDelete = await listRepository.GetList(id);
+                var itemToDelete = await itemRepository.GetItem(id);
 
-                if (listToDelete == null)
+                if (itemToDelete == null)
                 {
-                    return NotFound($"List with Id = {id} not found");
+                    return NotFound($"Item with Id = {id} not found");
                 }
 
-                return await listRepository.DeleteList(id);
+                return await itemRepository.DeleteItem(id);
             }
             catch (Exception)
             {

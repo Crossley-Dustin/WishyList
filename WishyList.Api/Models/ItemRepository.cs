@@ -67,6 +67,12 @@ namespace WishyList.Api.Models
             return await appDbContext.Items.FindAsync(itemId);
         }
 
+        public async Task<Item> GetItemByName(int listId, string itemName)
+        {
+            // only get matching items from the specified list, otherwise item names have to be unique across all users
+            return await appDbContext.Items.FirstOrDefaultAsync(i => i.ListId == listId && i.Label == itemName);
+        }
+
         public async Task<IEnumerable<Item>> GetListItems(int listId)
         {
             // get all items for the specified list
