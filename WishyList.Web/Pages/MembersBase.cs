@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using WishyList.Models;
 using WishyList.Web.Services;
@@ -11,13 +13,32 @@ namespace WishyList.Web.Pages
 {
     public class MembersBase : ComponentBase
     {
+        [CascadingParameter]
+        public Task<AuthenticationState> authenticationStateTask { get; set; }
+
         public IEnumerable<Member> Members { get; set; }
         
+        [Inject]
+        public NavigationManager NavigationManager { get; set; }
+
         [Inject]
         public IMemberService MemberService { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
+            // get authentication state of the user
+            var authenticationState = await authenticationStateTask;
+
+            //authenticationState.User.Claims.
+
+            if (!authenticationState.User.Identity.IsAuthenticated)
+            {
+                // If we wanted to redirect the user to the page they were trying to reach when directed to the login page
+                //string returnUrl = WebUtility.UrlEncode($"/editEmployee/{Id}");
+                //NavigationManager.NavigateTo($"/identity/account/login?returnUrl={returnUrl}");
+                NavigationManager.NavigateTo("/identity/account/login");
+            }
+
             Members = (await MemberService.GetMembers()).ToList();
         }
 

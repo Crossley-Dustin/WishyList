@@ -19,3 +19,10 @@
         }
     }
 </header>
+
+<!--Automate the logout so the user doesn't have to click logout, then click the logout again from the logout page-->
+<script>
+    (() => {
+        document.getElementById('logoutForm').submit();
+    })()
+</script>
