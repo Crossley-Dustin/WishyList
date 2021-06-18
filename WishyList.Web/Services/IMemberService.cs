@@ -10,5 +10,6 @@ namespace WishyList.Web.Services
     {
         Task<IEnumerable<Member>> GetMembers();
         Task<Member> GetMember(int id);
+        Task<Member> GetMemberByEmail(string email);
     }
 }

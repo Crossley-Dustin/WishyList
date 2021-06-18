@@ -3,19 +3,15 @@
 
 @attribute [Authorize]
 
-<h1>Welcome to your List!</h1>
+@if (Member == null)
+            {
+            <h1> Retreiving your list, please wait</h1>
+            }
+            else
+            {
 
-@if (Lists == null)
-            {
-                <div class="spinner"></div>
+            <h1>Welcome to your List, @Member.Name!</h1>
             }
-else
-            {
-                <ul>
-                    @foreach (var list in Lists)
-                {
-                    <li>@list.Name</li>
-                }
-                </ul>
-            }
+
+
 

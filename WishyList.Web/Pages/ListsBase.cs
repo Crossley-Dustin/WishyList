@@ -18,7 +18,10 @@ namespace WishyList.Web.Pages
         public NavigationManager NavigationManager { get; set; }
 
         //public IEnumerable<Item> Items { get; set; }
-        public IEnumerable<List> Lists { get; set; }
+        public Member Member { get; set; }
+        public List List { get; set; }
+        public IEnumerable<Item> ListItems { get; set; }
+        //public IEnumerable<List> Lists { get; set; }
 
         [Inject]
         public IMemberService MemberService { get; set; }
@@ -27,7 +30,9 @@ namespace WishyList.Web.Pages
 
         protected override async Task OnInitializedAsync()
         {
+            // possible process
 
+            // check authenticated user and get email
             // get authentication state of the user
             var authenticationState = await authenticationStateTask;
 
@@ -35,21 +40,28 @@ namespace WishyList.Web.Pages
             {
                 NavigationManager.NavigateTo("/identity/account/login");
             }
-
-            // possible process
-            // check authenticated user and get email
+                                  
             // search for members with that email
             // if no member found, create a member
-            // check if user last list is populated
-            // if no list, create a new list and update the member last list
-            // populate list
-            // get items in the list and populate items object
+            Member = await MemberService.GetMemberByEmail(authenticationState.User.Identity.Name);
+            if (Member != null)
+            {
+                // check if user last list is populated
+                List = await ListService.GetList(Member.LastListId);
+                // if no list, create a new list and update the member last list
+                
+                if (List != null)
+                {
+                    // populate listz
+                    ListItems = await ItemService.GetListItems(List.ListId);
+                    // get items in the list and populate items object
+                }
+            }
 
-            // have to implement an endpoint and service for this.
-            var user = MemberService.GetMemberByEmail(authenticationState.User.Identity.Name);
+
 
             //await Task.Run(LoadItems);
-            Lists = (await ListService.GetMemberLists(1)).ToList();
+            //Lists = (await ListService.GetMemberLists(1)).ToList();
         }
 
         /*

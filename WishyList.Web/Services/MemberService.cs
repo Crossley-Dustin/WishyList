@@ -22,6 +22,18 @@ namespace WishyList.Web.Services
             return await httpClient.GetJsonAsync<Member>($"api/members/{id}");
         }
 
+        public async Task<Member> GetMemberByEmail(string email)
+        {
+            var result = await httpClient.GetJsonAsync<Member>($"api/members/getmemberbyemail/{email}");
+
+            if (result != null)
+            {
+                return result;
+            }
+
+            return null;
+        }
+
         public async Task<IEnumerable<Member>> GetMembers()
         {
             return await httpClient.GetJsonAsync<Member[]>("api/members");

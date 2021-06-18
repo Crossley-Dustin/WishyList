@@ -53,6 +53,31 @@ namespace WishyList.Api.Controllers
             }
         }
 
+        [Route("[action]/{email}")]
+        [HttpGet]
+        public async Task<ActionResult<Member>> GetMemberByEmail(string email)
+        {
+            // api/members/getmemberbyemail/dustin@example.com
+            try
+            {
+                var result = await memberRepository.GetMemberByEmail(email);
+
+                if (result == null)
+                {
+                    // this sends a 404 to caller and blows up
+                    //return NotFound();
+                    //return NoContent();
+                    return null;
+                }
+
+                return result;
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database");
+            }
+        }
+
         [HttpPost]
         public async Task<ActionResult<Member>> CreateMember(Member member)
         {

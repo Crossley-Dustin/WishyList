@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -37,7 +38,10 @@ namespace WishyList.Api
             services.AddScoped<IListRepository, ListRepository>();
             services.AddScoped<IItemRepository, ItemRepository>();
 
-            services.AddControllers();
+            // Remove formatter that turns nulls into 204 - no content responses
+            // https://weblog.west-wind.com/posts/2020/Feb/24/Null-API-Responses-and-HTTP-204-Results-in-ASPNET-Core
+            services.AddControllers(opt => opt.OutputFormatters.RemoveType<HttpNoContentOutputFormatter>());
+            //services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
