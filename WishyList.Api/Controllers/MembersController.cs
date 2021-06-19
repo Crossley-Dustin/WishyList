@@ -106,21 +106,22 @@ namespace WishyList.Api.Controllers
             }
         }
 
-        [HttpPut("{id:int}")]
-        public async Task<ActionResult<Member>> UpdateMember(int id, Member member)
+        //[HttpPut("{id:int}")]
+        [HttpPut]
+        public async Task<ActionResult<Member>> UpdateMember(Member member) //int id,
         {
             try
             {
-                if(id != member.MemberId)
-                {
-                    return BadRequest("Member ID mismatch");
-                }
+                //if(id != member.MemberId)
+                //{
+                //    return BadRequest("Member ID mismatch");
+                //}
 
-                var memberToUpdate = await memberRepository.GetMember(id);
+                var memberToUpdate = await memberRepository.GetMember(member.MemberId);
 
                 if(memberToUpdate == null)
                 {
-                    return NotFound($"Member with Id = {id} not found");
+                    return NotFound($"Member with Id = {member.MemberId} not found");
                 }
 
                 return await memberRepository.UpdateMember(member);

@@ -1,17 +1,31 @@
-﻿@page "/"
+﻿@page "/lists/{id}"
 @inherits ListsBase
 
 @attribute [Authorize]
 
 @if (Member == null)
-            {
-            <h1> Retreiving your list, please wait</h1>
-            }
-            else
-            {
+{
+    <h1> Retrieving your info, please wait...</h1>
+}
+else
+{
+    <h1> @Member.Name's Lists</h1>
 
-            <h1>Welcome to your List, @Member.Name!</h1>
+    @if (Lists == null)
+    {
+        <h1>Retrieving your lists, please wait...</h1>
+    }
+    else
+    {
+        <ul>
+            @foreach (var list in Lists)
+            {
+                <li>@list.Name</li>
             }
+        </ul>
+    }
+
+}
 
 
 

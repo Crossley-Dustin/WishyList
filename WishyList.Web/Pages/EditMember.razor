@@ -1,7 +1,8 @@
 ﻿@page "/editmember/{id}"
 @inherits EditMemberBase
 
-<EditForm Model="@Member">
+<EditForm Model="@Member" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
     <h3>Edit Member</h3>
     <hr />
     <div class="form-group row">
@@ -11,6 +12,7 @@
         <div class="col-sm-10">
             <InputText id="name" class="form-control" placeholder="Name"
                        @bind-Value="Member.Name" />
+            <ValidationMessage For="@(() => Member.Name)"/>
         </div>
     </div>
     <div class="form-group row">
@@ -18,8 +20,9 @@
             Email
         </label>
         <div class="col-sm-10">
-            <InputText id="email" class="form-control" placeholder="Email"
+            <InputText id="email" readonly class="form-control" placeholder="Email" 
                        @bind-Value="Member.Email" />
         </div>
     </div>
+    <button class="btn btn-primary" type="submit">Submit</button>
 </EditForm>

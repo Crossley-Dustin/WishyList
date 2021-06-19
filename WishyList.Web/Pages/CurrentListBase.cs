@@ -15,14 +15,19 @@ namespace WishyList.Web.Pages
         public IListService ListService { get; set; }
         public IItemService ItemService { get; set; }
 
-        public Member member { get; set; }
+        public Member Member { get; set; }
 
         [Parameter]
         public string Id { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
-            member = await MemberService.GetMember(1);
+            if (int.TryParse(Id, out int memberId))
+            {
+                Member = await MemberService.GetMember(memberId);
+            }
+
+            
         }
     }
 }

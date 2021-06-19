@@ -14,7 +14,7 @@ namespace WishyList.Web.Pages
     public class MembersBase : ComponentBase
     {
         [CascadingParameter]
-        public Task<AuthenticationState> authenticationStateTask { get; set; }
+        public Task<AuthenticationState> AuthenticationStateTask { get; set; }
 
         public IEnumerable<Member> Members { get; set; }
         
@@ -27,7 +27,7 @@ namespace WishyList.Web.Pages
         protected override async Task OnInitializedAsync()
         {
             // get authentication state of the user
-            var authenticationState = await authenticationStateTask;
+            var authenticationState = await AuthenticationStateTask;
 
             //authenticationState.User.Claims.
 

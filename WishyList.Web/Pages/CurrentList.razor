@@ -1,5 +1,14 @@
-﻿@page "/currentlist"
+﻿@page "/currentlist/{id}"
 @inherits CurrentListBase
 
-<h3>Welcome @member.Name! </h3>
+
+@if (Member == null)
+{
+    <h1> Retreiving your list, please wait</h1>
+}
+else
+{
+
+    <h1>Welcome to your List, @Member.Name!</h1>
+}
 
