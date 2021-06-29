@@ -12,8 +12,6 @@ namespace WishyList.Web.Pages
     {
         [Inject]
         public IMemberService MemberService { get; set; }
-        public IListService ListService { get; set; }
-        public IItemService ItemService { get; set; }
 
         public Member Member { get; set; }
 

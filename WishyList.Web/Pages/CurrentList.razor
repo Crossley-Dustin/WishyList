@@ -4,11 +4,9 @@
 
 @if (Member == null)
 {
-    <h1> Retreiving your list, please wait</h1>
+    <h1> Retreieving your list, please wait</h1>
 }
 else
 {
-
-    <h1>Welcome to your List, @Member.Name!</h1>
+    <DisplayMemberList Member="Member"></DisplayMemberList>
 }
-

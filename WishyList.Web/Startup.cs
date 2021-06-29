@@ -31,6 +31,7 @@ namespace WishyList.Web
             services.AddRazorPages();
             services.AddServerSideBlazor();
             
+            // If you make a service on the Web side, make sure you register it before trying to use the service!!!
             services.AddHttpClient<IMemberService, MemberService>(client =>
             {
                 // Make sure this is the base address of the API and NOT the web project!!!
@@ -38,6 +39,11 @@ namespace WishyList.Web
             });
 
             services.AddHttpClient<IListService, ListService>(client =>
+            {
+                client.BaseAddress = new Uri("https://localhost:44303/");
+            });
+
+            services.AddHttpClient<IItemService, ItemService>(client =>
             {
                 client.BaseAddress = new Uri("https://localhost:44303/");
             });

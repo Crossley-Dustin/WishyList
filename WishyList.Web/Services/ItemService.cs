@@ -24,7 +24,14 @@ namespace WishyList.Web.Services
 
         public async Task<IEnumerable<Item>> GetListItems(int listId)
         {
-            return await httpClient.GetJsonAsync<Item[]>($"api/items/getlistitems/{listId}");
+            var result = await httpClient.GetJsonAsync<Item[]>($"api/items/getlistitems/{listId}");
+
+            if (result != null)
+            {
+                return result;
+            }
+
+            return null;
         }
     }
 }
