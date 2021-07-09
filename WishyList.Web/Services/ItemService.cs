@@ -17,6 +17,11 @@ namespace WishyList.Web.Services
             this.httpClient = httpClient;
         }
 
+        public async Task<Item> CreateItem(Item newItem)
+        {
+            return await httpClient.PostJsonAsync<Item>("api/items", newItem);
+        }
+
         public async Task<Item> GetItem(int itemId)
         {
             return await httpClient.GetJsonAsync<Item>($"api/items/{itemId}");
@@ -32,6 +37,11 @@ namespace WishyList.Web.Services
             }
 
             return null;
+        }
+
+        public async Task<Item> UpdateItem(Item updatedItem)
+        {
+            return await httpClient.PutJsonAsync<Item>("api/items", updatedItem);
         }
     }
 }

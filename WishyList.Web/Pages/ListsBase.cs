@@ -11,8 +11,8 @@ namespace WishyList.Web.Pages
 {
     public class ListsBase : ComponentBase
     {
-        //[CascadingParameter]
-        //public Task<AuthenticationState> AuthenticationStateTask { get; set; }
+        [CascadingParameter]
+        public Task<AuthenticationState> AuthenticationStateTask { get; set; }
 
         [Inject]
         public NavigationManager NavigationManager { get; set; }
@@ -22,8 +22,8 @@ namespace WishyList.Web.Pages
         //public IEnumerable<Item> ListItems { get; set; }
         public IEnumerable<List> Lists { get; set; }
 
-        [Parameter]
-        public string Id { get; set; }
+        //[Parameter]
+        //public string Id { get; set; }
 
         [Inject]
         public IMemberService MemberService { get; set; }
@@ -38,23 +38,23 @@ namespace WishyList.Web.Pages
 
             // check authenticated user and get email
             // get authentication state of the user
-            //var authenticationState = await AuthenticationStateTask;
+            var authenticationState = await AuthenticationStateTask;
 
-            //if (!authenticationState.User.Identity.IsAuthenticated)
-            //{
-            //    NavigationManager.NavigateTo("/identity/account/login");
-            //}
+            if (!authenticationState.User.Identity.IsAuthenticated)
+            {
+                NavigationManager.NavigateTo("/identity/account/login");
+            }
 
             //// search for members with that email
             //// if no member found, create a member
-            //Member = await MemberService.GetMemberByEmail(authenticationState.User.Identity.Name);
-            //if (Member != null)
-            //{
-            // check if user last list is populated
-            if (int.TryParse(Id, out int memberId))
+            Member = await MemberService.GetMemberByEmail(authenticationState.User.Identity.Name);
+            if (Member != null)
             {
-                Member = await MemberService.GetMember(memberId);
-                Lists = await ListService.GetMemberLists(memberId);
+            // check if user last list is populated
+            //if (int.TryParse(Id, out int memberId))
+            //{
+                //Member = await MemberService.GetMember(memberId);
+                Lists = await ListService.GetMemberLists(Member.MemberId);
             }
                 
                 // if no list, create a new list and update the member last list

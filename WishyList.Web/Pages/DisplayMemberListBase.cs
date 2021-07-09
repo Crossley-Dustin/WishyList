@@ -29,5 +29,17 @@ namespace WishyList.Web.Pages
                 Items = await ItemService.GetListItems(Member.LastListId);
             }
         }
+
+        public async Task AddListItem()
+        {
+            var item = new Item
+            {
+                MemberId = Member.MemberId,
+                ListId = List.ListId,
+                Label = "New Item"
+            };
+
+            await ItemService.CreateItem(item);
+        }
     }
 }

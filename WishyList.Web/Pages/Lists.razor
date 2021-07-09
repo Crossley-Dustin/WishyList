@@ -1,4 +1,4 @@
-﻿@page "/lists/{id}"
+﻿@page "/lists"
 @inherits ListsBase
 
 @attribute [Authorize]
@@ -11,9 +11,9 @@ else
 {
     <h1> @Member.Name's Lists</h1>
 
-    @if (Lists == null)
+    @if (Lists.Count() == 0)
     {
-        <h1>Retrieving your lists, please wait...</h1>
+        <button class="btn btn-primary">New List</button>
     }
     else
     {

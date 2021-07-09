@@ -58,8 +58,14 @@ namespace WishyList.Web.Pages
                 };
 
                 Member = await MemberService.CreateMember(Member);
+                
+                NavigationManager.NavigateTo("/editmember/" + Member.MemberId);
             }
 
+
+            NavigationManager.NavigateTo("/memberdetails/" + Member.MemberId);
+            
+            /*
             if (Member != null)
             {
                 // check if user last list is populated
@@ -95,7 +101,7 @@ namespace WishyList.Web.Pages
             }
 
             NavigationManager.NavigateTo("currentlist/" + Member.MemberId);
-
+            */
         }
     }
 }

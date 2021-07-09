@@ -10,5 +10,7 @@ namespace WishyList.Web.Services
     {
         Task<IEnumerable<Item>> GetListItems(int listId);
         Task<Item> GetItem(int itemId);
+        Task<Item> CreateItem(Item newItem);
+        Task<Item> UpdateItem(Item updatedItem);
     }
 }
